@@ -15,7 +15,7 @@ interface TaskDao {
     fun updateTask(vararg tasks: Task): Completable
 
     @Delete
-    fun delete(vararg tasks: Task): Completable
+    fun deleteTask(vararg tasks: Task): Completable
 
     @Query("DELETE FROM task_table WHERE isDone == 1")
     fun deleteDone(): Completable

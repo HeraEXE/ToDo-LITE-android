@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.hera.todo_lite.R
 import com.hera.todo_lite.data.model.Task
 import com.hera.todo_lite.databinding.FragmentCreateTaskBinding
@@ -32,6 +33,7 @@ class CreateTaskFragment :
         val description: String = binding.editTextDescription.text.toString()
         if (title.isNotEmpty() && description.isNotEmpty()) {
             viewModel.createTask(Task(title, description))
+            findNavController().navigateUp()
         }
     }
 

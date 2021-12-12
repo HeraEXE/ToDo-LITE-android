@@ -33,7 +33,6 @@ class TaskListFragment : BaseFragment<TaskListViewModel>(R.layout.fragment_task_
             }
         }
         setupObservers()
-        viewModel.getAllTasks()
     }
 
     private fun setupObservers() {
@@ -50,6 +49,11 @@ class TaskListFragment : BaseFragment<TaskListViewModel>(R.layout.fragment_task_
         }
     }
 
+    override fun onStart() {
+        super.onStart()
+        viewModel.getAllTasks()
+    }
+
     private fun onCreateTask() {
         val action = TaskListFragmentDirections.actionTaskListFragmentToCreateTaskFragment()
         findNavController().navigate(action)
@@ -60,7 +64,8 @@ class TaskListFragment : BaseFragment<TaskListViewModel>(R.layout.fragment_task_
     }
 
     override fun onItemClick(task: Task) {
-        // TODO create EditTaskFragment
+        val action = TaskListFragmentDirections.actionTaskListFragmentToEditTaskFragment(task)
+        findNavController().navigate(action)
     }
 
     override fun onDestroyView() {

@@ -13,10 +13,21 @@
         <action
             android:id="@+id/action_taskListFragment_to_createTaskFragment"
             app:destination="@id/createTaskFragment" />
+        <action
+            android:id="@+id/action_taskListFragment_to_editTaskFragment"
+            app:destination="@id/editTaskFragment" />
     </fragment>
     <fragment
         android:id="@+id/createTaskFragment"
         android:name="com.hera.todo_lite.ui.create_task.CreateTaskFragment"
         android:label="@string/create_task_label"
         tools:layout="@layout/fragment_create_task" />
+    <fragment
+        android:id="@+id/editTaskFragment"
+        android:name="com.hera.todo_lite.ui.edit_task.EditTaskFragment"
+        android:label="@string/edit_task_label" >
+        <argument
+            android:name="task"
+            app:argType="com.hera.todo_lite.data.model.Task" />
+    </fragment>
 </navigation>

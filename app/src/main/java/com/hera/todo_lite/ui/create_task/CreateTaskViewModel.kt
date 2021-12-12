@@ -11,11 +11,11 @@ import javax.inject.Inject
 
 @HiltViewModel
 class CreateTaskViewModel @Inject constructor(
-    private val taskRepository: TaskRepository
+    private val repository: TaskRepository
 ) : BaseViewModel() {
 
     fun createTask(task: Task) {
-        val disposable: Disposable = taskRepository.addTask(task)
+        val disposable: Disposable = repository.addTask(task)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe()

@@ -1,10 +1,7 @@
 package com.hera.todo_lite.ui.task_list
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.hera.todo_lite.R
@@ -32,6 +29,18 @@ class TaskListFragment : BaseFragment<TaskListViewModel>(R.layout.fragment_task_
             fabCreateTask.setOnClickListener {
                 // TODO create AddTaskFragment
             }
+        }
+        setupObservers()
+        viewModel.getAllTasks()
+    }
+
+    private fun setupObservers() {
+        viewModel.allTasks.observe(viewLifecycleOwner) {
+            if (it.isEmpty()) {
+                binding.noTasksText.visibility = View.VISIBLE
+            }
+            binding.progressBar.visibility = View.GONE
+            taskListAdapter.submitList(it)
         }
     }
 

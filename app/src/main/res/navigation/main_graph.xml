@@ -9,5 +9,14 @@
         android:id="@+id/taskListFragment"
         android:name="com.hera.todo_lite.ui.task_list.TaskListFragment"
         android:label="@string/task_list_label"
-        tools:layout="@layout/fragment_task_list" />
+        tools:layout="@layout/fragment_task_list" >
+        <action
+            android:id="@+id/action_taskListFragment_to_createTaskFragment"
+            app:destination="@id/createTaskFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/createTaskFragment"
+        android:name="com.hera.todo_lite.ui.create_task.CreateTaskFragment"
+        android:label="@string/create_task_label"
+        tools:layout="@layout/fragment_create_task" />
 </navigation>

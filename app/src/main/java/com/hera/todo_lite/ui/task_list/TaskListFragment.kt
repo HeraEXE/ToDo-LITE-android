@@ -2,7 +2,9 @@ package com.hera.todo_lite.ui.task_list
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.hera.todo_lite.R
 import com.hera.todo_lite.data.model.Task
@@ -27,7 +29,7 @@ class TaskListFragment : BaseFragment<TaskListViewModel>(R.layout.fragment_task_
             recyclerTaskList.layoutManager = LinearLayoutManager(requireContext())
             recyclerTaskList.adapter = taskListAdapter
             fabCreateTask.setOnClickListener {
-                // TODO create AddTaskFragment
+                onCreateTask()
             }
         }
         setupObservers()
@@ -38,10 +40,19 @@ class TaskListFragment : BaseFragment<TaskListViewModel>(R.layout.fragment_task_
         viewModel.allTasks.observe(viewLifecycleOwner) {
             if (it.isEmpty()) {
                 binding.noTasksText.visibility = View.VISIBLE
+            } else {
+                binding.noTasksText.visibility = View.GONE
             }
-            binding.progressBar.visibility = View.GONE
+            if (binding.progressBar.visibility == View.VISIBLE) {
+                binding.progressBar.visibility = View.GONE
+            }
             taskListAdapter.submitList(it)
         }
+    }
+
+    private fun onCreateTask() {
+        val action = TaskListFragmentDirections.actionTaskListFragmentToCreateTaskFragment()
+        findNavController().navigate(action)
     }
 
     override fun onCheckBoxClick(updatedTask: Task) {
